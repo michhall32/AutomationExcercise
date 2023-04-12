@@ -8,6 +8,7 @@ from pages.home import HomePage
 from utilities.DataGiver import getRandomData
 from utilities.DataGiver import CONTACT_US_SUCCESS_MESSAGE, FILE_PATH, CORRECT_EMAIL
 
+
 class ContactUsForm(unittest.TestCase):
 
     def setUp(self) -> None:
@@ -30,7 +31,7 @@ class ContactUsForm(unittest.TestCase):
         self.contactUs_page.window_alert()
         self.assertEqual(CONTACT_US_SUCCESS_MESSAGE, self.contactUs_page.success_message())
 
-        # self.contactUs_page.back_to_home()            #TODO AD BLOCKS THE PAGE --> FIGURE OUT HOW TO CLOSE AD
+        # self.contactUs_page.back_to_home()            #TODO - AD BLOCKS THE PAGE --> FIGURE OUT HOW TO CLOSE AD
         # self.driver.refresh()
         # self.contactUs_page.back_to_home()
         # button_color = self.home_page.get_button_color()

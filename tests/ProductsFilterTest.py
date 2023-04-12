@@ -11,7 +11,7 @@ class ProductsFilters(unittest.TestCase):
     def setUp(self) -> None:
         options = webdriver.ChromeOptions()
         options.add_argument("--window-size=1024,768")
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
         self.driver.implicitly_wait(4)
         self.driver.get('https://automationexercise.com/')
@@ -37,6 +37,13 @@ class ProductsFilters(unittest.TestCase):
                 continue
 
         self.assertTrue(error_log == [], '\n' + '\n'.join(error_log))
+
+    def test_category(self):
+        subcategory_name = self.products_page.select_random_category()
+        products_amount = self.products_page.get_amount_of_visible_products()
+        products_name = self.products_page.get_name_of_random_visible_product()
+        self.assertGreater(products_amount, 0, 'This subcategory does not have any products in it.')
+        self.assertIn(subcategory_name, products_name.upper(), "This product does not have category's name in it")
 
     def tearDown(self) -> None:
         self.driver.quit()
