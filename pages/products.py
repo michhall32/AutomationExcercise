@@ -14,6 +14,9 @@ class ProductsPage(BasePage):
     category_button_selector = (By.CSS_SELECTOR, '.category-products .panel-title a')
     subcategory_button_selector = (By.CSS_SELECTOR, '.category-products div[class="panel-collapse in"] li a')
 
+    view_product_selector = (By.CSS_SELECTOR, '.choose a')
+    product_price_selector = (By.CSS_SELECTOR, '.single-products h2')
+
     def close_ad(self):
         self.driver.find_element(*self.products_tab_selector).click()
         self.driver.refresh()
@@ -46,3 +49,9 @@ class ProductsPage(BasePage):
         subcategory_name = subcategory.text
         subcategory.click()
         return subcategory_name
+
+    def view_product(self):
+        product_price = self.driver.find_element(*self.product_price_selector).text
+        product_name = self.driver.find_element(*self.products_items_selector).text
+        self.driver.find_element(*self.view_product_selector).click()
+        return product_price, product_name

@@ -19,9 +19,9 @@ class ProductsFilters(unittest.TestCase):
         self.products_page = ProductsPage(self.driver)
 
         self.products_page.close_ad()
+        self.products_page.navigate_to_products()
 
     def test_brands(self):
-        self.products_page.navigate_to_products()
         brands_elements = self.products_page.list_of_brands()
         error_log = []
 
