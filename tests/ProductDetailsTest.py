@@ -28,7 +28,7 @@ class ProductDetails(unittest.TestCase):
     def test_product_details(self):
         subcategory_name1 = self.products_page.select_random_category()
         product_price1, product_name1 = self.products_page.view_product()
-        product_name2, product_price2, subcategory_name2 = self.product_details_page.product_details()
+        product_name2, product_price2, subcategory_name2 = self.product_details_page.get_product_details()
         self.assertEqual(product_name1, product_name2, 'The name of the product is not the same!')
         self.assertEqual(product_price1, product_price2, 'The price of the product is not the same!')
         self.assertIn(subcategory_name1, subcategory_name2, 'The category of the product is not the same')
@@ -38,7 +38,6 @@ class ProductDetails(unittest.TestCase):
         self.products_page.view_product()
         self.product_details_page.send_review_form(getRandomData(6), CORRECT_EMAIL, getRandomData(300))
         self.assertEqual(REVIEW_SUCCESS_MESSAGE, self.product_details_page.review_success_message())
-
 
     def tearDown(self) -> None:
         self.driver.quit()

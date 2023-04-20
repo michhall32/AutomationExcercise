@@ -8,12 +8,13 @@ class ViewCart(BasePage):
     cart_items_selector = (By.CSS_SELECTOR, '.cart_info tbody tr')
     cart_item_name = (By.CSS_SELECTOR, '.cart_description a')
     cart_item_price = (By.CSS_SELECTOR, '.cart_total p')
+    quantity_indicator_selector = (By.CLASS_NAME, 'cart_quantity')
 
-    def products_in_cart(self):
+    def amount_of_products_in_cart(self):
         elements = self.driver.find_elements(*self.cart_items_selector)
         return len(elements)
 
-    def product_names_in_cart(self):
+    def get_product_names_in_cart(self):
         list_of_names = []
         names = self.driver.find_elements(*self.cart_item_name)
         for name in names:
@@ -21,7 +22,7 @@ class ViewCart(BasePage):
 
         return list_of_names
 
-    def product_prices_in_cart(self):
+    def get_product_prices_in_cart(self):
         list_of_prices = []
         prices = self.driver.find_elements(*self.cart_item_price)
         for price in prices:
@@ -29,4 +30,6 @@ class ViewCart(BasePage):
 
         return list_of_prices
 
+    def get_quantity_of_product(self):
+        return int(self.driver.find_element(*self.quantity_indicator_selector).text)
 

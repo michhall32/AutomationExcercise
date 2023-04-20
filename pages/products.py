@@ -59,7 +59,7 @@ class ProductsPage(BasePage):
         return subcategory_name
 
     def view_product(self):
-        product_price = self.driver.find_element(*self.product_price_selector).text
+        product_price = self.driver.find_element(*self.product_price_selector).text.strip('Rs. ')
         product_name = self.driver.find_element(*self.product_item_selector).text
         self.driver.find_element(*self.view_product_selector).click()
         return product_price, product_name
