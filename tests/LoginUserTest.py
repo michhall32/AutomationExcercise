@@ -2,6 +2,7 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import NoSuchElementException
 from utilities.DataGiver import CORRECT_EMAIL, INCORRECT_EMAIL, USERNAME, PASSWORD
 from utilities.DataGiver import INCORRECT_LOGIN_MESSAGE
 
@@ -32,6 +33,21 @@ class LoginUser(unittest.TestCase):
         self.login_page.login_by_email(INCORRECT_EMAIL, PASSWORD)
         incorrect_email_label = self.login_page.label_incorrect_email_is_displayed().text
         self.assertEqual(incorrect_email_label, INCORRECT_LOGIN_MESSAGE)
+
+    def test_log_out(self):
+        self.login_page.login_by_email(CORRECT_EMAIL, PASSWORD)
+        self.login_page.log_out()
+
+        button_color = self.login_page.get_button_color('login_tab')
+        self.assertEqual(button_color, 'orange')
+
+        try:
+            self.home_page.username_is_displayed()
+            not_found = False
+        except NoSuchElementException:
+            not_found = True
+
+        assert not_found
 
     def tearDown(self) -> None:
         self.driver.quit()

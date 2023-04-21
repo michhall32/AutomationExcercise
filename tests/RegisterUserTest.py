@@ -28,9 +28,9 @@ class RegisterUser(unittest.TestCase):
         self.account_deleted = AccountDeletedPage(self.driver)
 
     def test_register_new_user(self):
-        # self.home_page.navigate_to_homepage()
-        # button_color = self.home_page.get_button_color()
-        # self.assertEqual(button_color, 'orange')
+        self.home_page.navigate_to_homepage()
+        button_color = self.home_page.get_button_color('home_tab')
+        self.assertEqual(button_color, 'orange')
 
         self.login_page.register_new_user(USERNAME, NEW_EMAIL)
         self.signup_page.enter_account_information(PASSWORD)

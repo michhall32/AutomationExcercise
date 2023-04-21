@@ -2,9 +2,10 @@ from selenium.webdriver.common.by import By
 
 from pages.base import BasePage
 
-class LoginPage(BasePage):
 
+class LoginPage(BasePage):
     login_tab_selector = (By.CSS_SELECTOR, '.shop-menu  a[href="/login"]')
+    logout_tab_selector = (By.CSS_SELECTOR, '.shop-menu  a[href="/logout"]')
 
     email_login_field_selector = (By.CSS_SELECTOR, 'input[data-qa="login-email"]')
     password_field_selector = (By.CSS_SELECTOR, 'input[data-qa="login-password"]')
@@ -35,4 +36,5 @@ class LoginPage(BasePage):
     def label_incorrect_email_is_displayed(self):
         return self.driver.find_element(*self.label_incorrect_email_selector)
 
-
+    def log_out(self):
+        self.driver.find_element(*self.logout_tab_selector).click()
