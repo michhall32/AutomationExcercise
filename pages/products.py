@@ -64,11 +64,12 @@ class ProductsPage(BasePage):
         self.driver.find_element(*self.view_product_selector).click()
         return product_price, product_name
 
-    def add_product_to_cart(self, item_name, action):
+    def search_product(self, item_name):
         self.driver.find_element(*self.searchbox_selector).clear()
         self.driver.find_element(*self.searchbox_selector).send_keys(item_name)
         self.driver.find_element(*self.search_button_selector).click()
 
+    def add_product_to_cart(self, action):
         product = self.driver.find_element(*self.product_item_selector)
         product_name = self.driver.find_element(*self.product_item_selector).text
         product_price = self.driver.find_element(*self.product_price_selector).text.strip('Rs. ')

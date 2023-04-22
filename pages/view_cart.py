@@ -5,10 +5,15 @@ from pages.base import BasePage
 
 class ViewCart(BasePage):
 
+    cart_tab_selector = (By.CSS_SELECTOR, '.shop-menu a[href="/view_cart"')
+
     cart_items_selector = (By.CSS_SELECTOR, '.cart_info tbody tr')
     cart_item_name = (By.CSS_SELECTOR, '.cart_description a')
     cart_item_price = (By.CSS_SELECTOR, '.cart_total p')
     quantity_indicator_selector = (By.CLASS_NAME, 'cart_quantity')
+
+    def navigate_to_cart(self):
+        self.driver.find_element(*self.cart_tab_selector).click()
 
     def amount_of_products_in_cart(self):
         elements = self.driver.find_elements(*self.cart_items_selector)

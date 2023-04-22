@@ -26,8 +26,10 @@ class AddToCart(unittest.TestCase):
         self.products_page.navigate_to_products()
 
     def test_add_products_to_cart(self):
-        product1_name, product1_price = self.products_page.add_product_to_cart('unicorn', 'ContinueShopping')
-        product2_name, product2_price = self.products_page.add_product_to_cart('jeans', 'ViewCart')
+        self.products_page.search_product('unicorn')
+        product1_name, product1_price = self.products_page.add_product_to_cart('ContinueShopping')
+        self.products_page.search_product('jeans')
+        product2_name, product2_price = self.products_page.add_product_to_cart('ViewCart')
 
         number_of_products_in_cart = self.view_cart_page.amount_of_products_in_cart()
 
@@ -51,11 +53,21 @@ class AddToCart(unittest.TestCase):
         self.product_details_page.add_to_cart('ViewCart')
 
         quantity_in_cart = self.view_cart_page.get_quantity_of_product()
-        self.assertEqual(int(amount1+amount2), quantity_in_cart, 'The quantity does not match!')
+        self.assertEqual(int(amount1 + amount2), quantity_in_cart, 'The quantity does not match!')
 
-        total_price = int(product_price) * int(amount1+amount2)
+        total_price = int(product_price) * int(amount1 + amount2)
         cart_price = int(self.view_cart_page.get_product_prices_in_cart()[0])
         self.assertEqual(total_price, cart_price, 'The price does not match!')
+
+    def test_negative_quantity_in_cart(self):
+        amount = -5
+        self.products_page.select_random_category()
+        self.products_page.view_product()
+        self.product_details_page.set_quantity(amount)
+        self.product_details_page.add_to_cart('ViewCart')
+
+        number_of_products_in_cart = self.view_cart_page.amount_of_products_in_cart()
+        self.assertEqual(0, number_of_products_in_cart, 'There should be no products in cart!')
 
     def tearDown(self) -> None:
         self.driver.quit()
