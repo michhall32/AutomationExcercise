@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from pages.product_details import ProductDetailsPage
 from pages.products import ProductsPage
 from pages.view_cart import ViewCart
+from utilities.DataGiver import EMPTY_CART_MESSAGE
 
 
 class AddToCart(unittest.TestCase):
@@ -68,6 +69,22 @@ class AddToCart(unittest.TestCase):
 
         number_of_products_in_cart = self.view_cart_page.amount_of_products_in_cart()
         self.assertEqual(0, number_of_products_in_cart, 'There should be no products in cart!')
+
+    def test_remove_product_from_cart(self):
+        self.products_page.search_product('winter')
+        self.products_page.add_product_to_cart('ContinueShopping')
+        self.products_page.search_product('summer')
+        self.products_page.add_product_to_cart('ViewCart')
+
+        self.view_cart_page.delete_product()
+        number_of_products_in_cart = self.view_cart_page.amount_of_products_in_cart()
+        self.assertEqual(1, number_of_products_in_cart)
+
+        self.view_cart_page.delete_product()
+        self.assertEqual(EMPTY_CART_MESSAGE, self.view_cart_page.get_empty_cart_message())
+
+        self.view_cart_page.back_to_products()
+        self.assertEqual('Automation Exercise - All Products', self.driver.title)
 
     def tearDown(self) -> None:
         self.driver.quit()

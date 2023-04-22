@@ -12,6 +12,7 @@ INCORRECT_LOGIN_MESSAGE = 'Your email or password is incorrect!'
 EMAIL_ALREADY_EXIST_MESSAGE = 'Email Address already exist!'
 CONTACT_US_SUCCESS_MESSAGE = "Success! Your details have been submitted successfully."
 REVIEW_SUCCESS_MESSAGE = "Thank you for your review."
+EMPTY_CART_MESSAGE = "Cart is empty!"
 FILE_PATH = 'C:\\Users\\Z6GLD\\Desktop\\Additional\\Skillsy\\Selenium\\AutomationExcercise\\utilities\\automationexcercise.png'
 
 

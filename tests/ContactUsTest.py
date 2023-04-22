@@ -31,12 +31,6 @@ class ContactUsForm(unittest.TestCase):
         self.contactUs_page.window_alert()
         self.assertEqual(CONTACT_US_SUCCESS_MESSAGE, self.contactUs_page.success_message())
 
-        # self.contactUs_page.back_to_home()            #TODO - AD BLOCKS THE PAGE --> FIGURE OUT HOW TO CLOSE AD
-        # self.driver.refresh()
-        # self.contactUs_page.back_to_home()
-        # button_color = self.home_page.get_button_color()
-        # self.assertEqual('orange', button_color)
-
     def tearDown(self) -> None:
         self.driver.quit()
 
