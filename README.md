@@ -184,7 +184,7 @@ automating tests for the website: https://automationexercise.com/
   - Python - programming language used in this repository to write automated tests
   - unittest - Python framework supporting test automation
 
-## 4. Directories descpription:
+## 4. Directories description:
   
   - pages - contains page objects classes representing particular pages of the website
   - tests - contains test classes with testcases
